@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CA Soluções | Portaria e Limpeza para Condomínios</title>
+  <meta name="description" content="CA Soluções: Portaria 24h, portaria remota, limpeza e zeladoria. Atendimento em Anápolis, Pirenópolis e Goiânia. Propostas rápidas via WhatsApp." />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- FAVICONS -->
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+  <link rel="apple-touch-icon" sizes="256x256" href="favicon-256.png">
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --muted:#93a4c7;
+      --text:#eaf0ff;
+
+      /* Tema CA (dourado) */
+      --primary:#D4B26A;
+      --primary2:#8A5C1E;
+
+      --ok:#22c55e;
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 18px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";}
+    body{
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(212,178,106,.14), transparent 55%),
+        radial-gradient(900px 500px at 90% 20%, rgba(138,92,30,.12), transparent 55%),
+        radial-gradient(900px 500px at 70% 95%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 18px;}
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:10px 14px; border-radius:999px; color:var(--muted);
+      backdrop-filter: blur(8px);
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.18)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px; padding:12px 16px; border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      transition:.18s ease;
+      cursor:pointer;
+      user-select:none;
+      font-weight:800;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.10)}
+    .btn.primary{
+      border: none;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      box-shadow: 0 14px 30px rgba(212,178,106,.10), 0 14px 30px rgba(138,92,30,.10);
+    }
+    .btn.primary:hover{filter:saturate(1.05); transform: translateY(-1px)}
+    .btn.ghost{background:transparent}
+
+    .nav{
+      position:sticky; top:0; z-index:50;
+      border-bottom:1px solid var(--border);
+      background: rgba(11,18,32,.65);
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0; gap:12px;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand h1{font-size:14px;margin:0}
+    .brand small{display:block;color:var(--muted);font-weight:600}
+
+    /* LOGO TOPO */
+    .logo-wrap{
+      width: 180px;
+      height: 44px;
+      display:flex;
+      align-items:center;
+    }
+    .logo-img{
+      width: 180px;
+      height: auto;
+      display:block;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+    }
+
+    .menu{display:flex; gap:14px; align-items:center}
+    .menu a{
+      color:var(--muted);
+      padding:10px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+      font-weight:800;
+      font-size:14px;
+    }
+    .menu a:hover{color:var(--text); border-color: var(--border); background: rgba(255,255,255,.04)}
+    .mobile-toggle{display:none}
+
+    .hero{padding:54px 0 28px;}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .title{
+      font-size: clamp(30px, 4.2vw, 54px);
+      line-height:1.05;
+      margin:14px 0 12px;
+      letter-spacing:-0.02em;
+    }
+    .subtitle{
+      color:var(--muted);
+      font-size: clamp(15px, 1.4vw, 18px);
+      margin:0 0 18px;
+      max-width: 64ch;
+    }
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+
+    .hero-card{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-70px;
+      background: radial-gradient(320px 220px at 30% 20%, rgba(212,178,106,.18), transparent 60%),
+                  radial-gradient(260px 180px at 80% 30%, rgba(138,92,30,.16), transparent 60%);
+      transform: rotate(12deg);
+    }
+    .hero-card > *{position:relative}
+
+    /* MARCA D’ÁGUA ESCUDO */
+    .watermark{
+      position:absolute;
+      right:-40px;
+      bottom:-70px;
+      width:280px;
+      opacity:.10;
+      transform: rotate(-10deg);
+      pointer-events:none;
+      filter: saturate(1.1);
+      z-index: 0;
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .kpi{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:12px;
+    }
+    .kpi b{display:block; font-size:20px}
+    .kpi span{color:var(--muted); font-size:13px}
+
+    .section{padding:40px 0;}
+    .section h2{
+      margin:0 0 10px;
+      font-size: clamp(22px, 2.3vw, 32px);
+      letter-spacing:-0.02em;
+    }
+    .section p.lead{margin:0 0 18px; color:var(--muted); max-width:80ch}
+
+    .grid-3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    .grid-2{display:grid; grid-template-columns: repeat(2, 1fr); gap:14px}
+
+    .card{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+    }
+    .card h3{margin:2px 0 6px; font-size:16px}
+    .card p{margin:0; color:var(--muted); font-size:14px}
+
+    .icon{
+      width:40px;height:40px;border-radius:14px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      margin-bottom:10px;
+      font-size:18px;
+    }
+
+    .list{
+      margin:12px 0 0; padding:0; list-style:none;
+      display:grid; gap:8px;
+    }
+    .list li{
+      display:flex; gap:10px; align-items:flex-start;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .check{
+      width:18px; height:18px; border-radius:6px;
+      background: rgba(34,197,94,.14);
+      border:1px solid rgba(34,197,94,.35);
+      display:grid; place-items:center; flex:0 0 auto;
+      margin-top:2px;
+      color: var(--ok);
+      font-weight:900;
+    }
+
+    .pricing{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px;}
+    .price{position:relative; overflow:hidden;}
+    .price.featured{
+      border:1px solid rgba(212,178,106,.35);
+      background: linear-gradient(180deg, rgba(212,178,106,.12), rgba(255,255,255,.03));
+      box-shadow: 0 18px 40px rgba(212,178,106,.10);
+    }
+    .badge{
+      position:absolute; top:14px; right:14px;
+      font-size:12px; font-weight:900;
+      padding:6px 10px; border-radius:999px;
+      background: rgba(212,178,106,.16);
+      border:1px solid rgba(212,178,106,.35);
+      color: var(--text);
+    }
+    .price .value{font-size:32px; margin:2px 0 2px; font-weight:900}
+    .price small{color:var(--muted)}
+    .tag{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-weight:900;
+      font-size:12px;
+      margin-top:10px;
+    }
+
+    .faq{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    details{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding:14px;
+    }
+    summary{cursor:pointer; font-weight:900; list-style:none;}
+    summary::-webkit-details-marker{display:none}
+    details p{color:var(--muted); margin:8px 0 0; font-size:14px}
+
+    .contact{display:grid; grid-template-columns: 1fr 1fr; gap:14px; align-items:start;}
+    input, textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      padding:12px 12px;
+      color:var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    textarea{min-height:120px; resize:vertical}
+    label{font-size:13px; color:var(--muted); display:block; margin:10px 0 6px}
+
+    .footer{
+      padding:22px 0 32px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .float-whats{
+      position:fixed; right:16px; bottom:16px; z-index:60;
+      display:flex; gap:10px; align-items:center;
+      padding:12px 14px;
+      border-radius:999px;
+      background: rgba(34,197,94,.18);
+      border:1px solid rgba(34,197,94,.35);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      font-weight:900;
+    }
+    .float-whats span{font-size:14px}
+    .float-whats i{font-style:normal}
+
+    .muted{color:var(--muted)}
+    .divider{height:1px;background:var(--border); margin:14px 0}
+    .hide-desktop{display:none}
+
+    @media (max-width: 940px){
+      .hero-grid{grid-template-columns: 1fr;}
+      .pricing{grid-template-columns: 1fr}
+      .grid-3{grid-template-columns: 1fr}
+      .grid-2{grid-template-columns: 1fr}
+      .faq{grid-template-columns: 1fr}
+      .contact{grid-template-columns: 1fr}
+      .mobile-toggle{display:inline-flex}
+      .menu{
+        position:fixed; left:14px; right:14px; top:68px;
+        flex-direction:column; align-items:stretch;
+        gap:8px;
+        border:1px solid var(--border);
+        background: rgba(11,18,32,.88);
+        backdrop-filter: blur(10px);
+        padding:12px;
+        border-radius: 18px;
+        transform: translateY(-10px);
+        opacity:0; pointer-events:none;
+        transition:.18s ease;
+      }
+      .menu.open{transform: translateY(0); opacity:1; pointer-events:auto;}
+      .menu a{display:block}
+      .hide-mobile{display:none}
+      .hide-desktop{display:block}
+      .logo-wrap{width: 150px;}
+      .logo-img{width:150px;}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <div class="brand">
+          <div class="logo-wrap">
+            <img class="logo-img" src="ca_solutions_logo_horizontal.webp" alt="CA Solutions">
+          </div>
+          <div>
+            <h1>CA Soluções</h1>
+            <small>Portaria e Limpeza • Anápolis / Pirenópolis / Goiânia</small>
+          </div>
+        </div>
+
+        <button class="btn mobile-toggle hide-desktop" id="btnMenu" aria-label="Abrir menu">☰ Menu</button>
+
+        <nav class="menu" id="menu">
+          <a href="#servicos">Serviços</a>
+          <a href="#solucoes">Soluções</a>
+          <a href="#planos">Planos e Valores</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contato" class="btn primary" style="display:inline-flex; justify-content:center;">Falar agora</a>
+        </nav>
+
+        <div class="hide-mobile">
+          <a class="btn ghost" href="#planos">Ver valores</a>
+          <a class="btn primary" href="#contato">Solicitar proposta</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="pill"><span class="dot"></span> Atendimento rápido • Equipe treinada • Rotina padronizada</div>
+          <h2 class="title">Portaria e Limpeza para condomínio <span style="background:linear-gradient(135deg,var(--primary),var(--primary2));-webkit-background-clip:text;background-clip:text;color:transparent;">com padrão premium</span>.</h2>
+          <p class="subtitle">
+            A <b style="color:var(--text)">CA Soluções</b> entrega operação completa para condomínios:
+            <b style="color:var(--text)">portaria 24h física</b>, <b style="color:var(--text)">portaria remota</b>,
+            <b style="color:var(--text)">limpeza</b> e <b style="color:var(--text)">zeladoria</b>.
+            Controle de acesso, registro de ocorrências e rotina com checklists — com foco em segurança e organização.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#planos">💰 Ver valores</a>
+            <a class="btn" href="#servicos">✅ Serviços</a>
+            <a class="btn" href="#contato">📩 Pedir proposta</a>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi"><b>Portaria</b><span>Controle de acesso + encomendas</span></div>
+            <div class="kpi"><b>Limpeza</b><span>Rotina diária + checklist</span></div>
+            <div class="kpi"><b>Zeladoria</b><span>Vistoria + manutenção básica</span></div>
+            <div class="kpi"><b>Relatórios</b><span>Transparência para síndico</span></div>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <img class="watermark" src="ca_solutions_logo_shield.webp" alt="" aria-hidden="true">
+
+          <h3 style="margin:0 0 8px; position:relative; z-index:1;">Planos principais</h3>
+          <p class="muted" style="margin:0 0 12px; position:relative; z-index:1;">Valores iniciais (personalizamos conforme o condomínio).</p>
+
+          <div class="card" style="padding:14px; background: rgba(255,255,255,.02); position:relative; z-index:1;">
+            <h3 style="margin:0 0 6px;">🏢 Portaria 24h (Física)</h3>
+            <div style="font-size:26px; font-weight:900; margin:0 0 4px;">A partir de R$ 27.500<span style="font-size:14px; font-weight:800;">/mês</span></div>
+            <p class="muted" style="margin:0;">Inclui <b style="color:var(--text)">zeladoria + limpeza</b>.</p>
+            <span class="tag">📌 Operação completa</span>
+          </div>
+
+          <div style="height:10px"></div>
+
+          <div class="card" style="padding:14px; background: rgba(255,255,255,.02); position:relative; z-index:1;">
+            <h3 style="margin:0 0 6px;">🖥️ Portaria Remota</h3>
+            <div style="font-size:26px; font-weight:900; margin:0 0 4px;">A partir de R$ 15.000<span style="font-size:14px; font-weight:800;">/mês</span></div>
+            <p class="muted" style="margin:0;">Ideal para reduzir custo e manter segurança.</p>
+            <span class="tag">🔒 Controle de acesso</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="pill" style="justify-content:space-between; width:100%; gap:12px; position:relative; z-index:1;">
+            <span>📞 WhatsApp</span>
+            <span style="color:var(--text); font-weight:900;" id="whatsNumber"></span>
+          </div>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; position:relative; z-index:1;">
+            <a class="btn primary" id="btnWhatsHero" href="#" target="_blank" rel="noopener">💬 Chamar no WhatsApp</a>
+            <a class="btn" href="#contato">📄 Solicitar proposta</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <!-- SERVIÇOS -->
+  <section class="section" id="servicos">
+    <div class="container">
+      <h2>Serviços da CA Soluções</h2>
+      <p class="lead">Estruturamos a operação do condomínio com equipe, rotina e controle. Você sabe o que está sendo feito e quando.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">🛡️</div>
+          <h3>Portaria (física)</h3>
+          <p>Controle de acesso de moradores, visitantes e prestadores, com registro e postura profissional.</p>
+          <ul class="list">
+            <li><span class="check">✓</span> Controle de entrada e saída</li>
+            <li><span class="check">✓</span> Registro de ocorrências</li>
+            <li><span class="check">✓</span> Controle de encomendas</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">🖥️</div>
+          <h3>Portaria remota</h3>
+          <p>Atendimento remoto com controle de acesso e monitoramento (modelo ajustado ao condomínio).</p>
+          <ul class="list">
+            <li><span class="check">✓</span> Redução de custo</li>
+            <li><span class="check">✓</span> Controle de acesso</li>
+            <li><span class="check">✓</span> Integração com CFTV</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">🧼</div>
+          <h3>Limpeza e zeladoria</h3>
+          <p>Limpeza de áreas comuns + zeladoria com rotina padronizada e checklist.</p>
+          <ul class="list">
+            <li><span class="check">✓</span> Rotina diária/semanal</li>
+            <li><span class="check">✓</span> Checklist e padrão</li>
+            <li><span class="check">✓</span> Apoio em manutenção básica</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUÇÕES -->
+  <section class="section" id="solucoes">
+    <div class="container">
+      <h2>O que entregamos na prática</h2>
+      <p class="lead">Além da equipe, entregamos gestão de rotina para evitar falhas e melhorar o padrão do condomínio.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="icon">📦</div>
+          <h3>Encomendas e ocorrências</h3>
+          <p>Processo simples e rastreável para recebimento/entrega e registro de ocorrências do dia a dia.</p>
+          <ul class="list">
+            <li><span class="check">✓</span> Registro organizado</li>
+            <li><span class="check">✓</span> Transparência para o síndico</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">📷</div>
+          <h3>Apoio com CFTV e controle</h3>
+          <p>Rotina de verificação e suporte operacional para melhorar segurança e prevenção.</p>
+          <ul class="list">
+            <li><span class="check">✓</span> Monitoramento conforme rotina</li>
+            <li><span class="check">✓</span> Padrão de abordagem</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">🧾</div>
+          <h3>Relatórios e checklists</h3>
+          <p>Checklists de execução e visão do que foi feito/pendente para o síndico.</p>
+          <ul class="list">
+            <li><span class="check">✓</span> Controle de qualidade</li>
+            <li><span class="check">✓</span> Melhor decisão</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">⚙️</div>
+          <h3>Padronização de equipe</h3>
+          <p>Postura, rotina e alinhamento para manter padrão profissional no condomínio.</p>
+          <ul class="list">
+            <li><span class="check">✓</span> Procedimentos claros</li>
+            <li><span class="check">✓</span> Redução de falhas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section class="section" id="planos">
+    <div class="container">
+      <h2>Planos e valores</h2>
+      <p class="lead">Valores iniciais. Ajustamos conforme número de acessos, tamanho do condomínio, turnos e necessidades.</p>
+
+      <div class="pricing">
+        <div class="card price">
+          <h3>Portaria Remota</h3>
+          <div class="value">R$ 15.000<span style="font-size:14px; font-weight:800;">/mês</span></div>
+          <small class="muted">A partir de</small>
+          <ul class="list">
+            <li><span class="check">✓</span> Controle de acesso</li>
+            <li><span class="check">✓</span> Integração com CFTV</li>
+            <li><span class="check">✓</span> Suporte operacional</li>
+          </ul>
+          <div style="margin-top:14px">
+            <a class="btn" href="#contato">Quero proposta</a>
+          </div>
+        </div>
+
+        <div class="card price featured">
+          <span class="badge">Mais pedido</span>
+          <h3>Portaria 24h (Física)</h3>
+          <div class="value">R$ 27.500<span style="font-size:14px; font-weight:800;">/mês</span></div>
+          <small class="muted">A partir de • Inclui zeladoria + limpeza</small>
+          <ul class="list">
+            <li><span class="check">✓</span> Controle de acesso 24h</li>
+            <li><span class="check">✓</span> Encomendas e ocorrências</li>
+            <li><span class="check">✓</span> Zeladoria + limpeza</li>
+            <li><span class="check">✓</span> Rotina com checklist</li>
+          </ul>
+          <div style="margin-top:14px">
+            <a class="btn primary" href="#contato">Solicitar proposta</a>
+          </div>
+        </div>
+
+        <div class="card price">
+          <h3>Personalizado</h3>
+          <div class="value">Sob consulta</div>
+          <small class="muted">Conforme escala e necessidades</small>
+          <ul class="list">
+            <li><span class="check">✓</span> Portaria parcial/turnos</li>
+            <li><span class="check">✓</span> Limpeza sob rotina</li>
+            <li><span class="check">✓</span> Zeladoria e apoio</li>
+          </ul>
+          <div style="margin-top:14px">
+            <a class="btn" href="#contato">Montar pacote</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:12px">
+        * Valores “a partir de” podem variar conforme acessos, número de blocos/torres, horários e demandas.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2>Perguntas frequentes</h2>
+      <p class="lead">Dúvidas comuns antes de fechar.</p>
+
+      <div class="faq">
+        <details>
+          <summary>O que está incluso na Portaria 24h (Física)?</summary>
+          <p>Equipe 24h, controle de acesso, registro de ocorrências e controle de encomendas. No plano a partir de R$ 27.500, inclui também <b>zeladoria + limpeza</b>.</p>
+        </details>
+        <details>
+          <summary>A Portaria Remota funciona sem porteiro?</summary>
+          <p>Sim, o acesso é controlado remotamente (depende da estrutura do condomínio). Avaliamos e indicamos a melhor configuração.</p>
+        </details>
+        <details>
+          <summary>Vocês atendem quais cidades?</summary>
+          <p><b>Anápolis</b>, <b>Pirenópolis</b> e <b>Goiânia</b> (região sob análise).</p>
+        </details>
+        <details>
+          <summary>Como pedir proposta rápida?</summary>
+          <p>Clique em “Chamar no WhatsApp” e mande nome do condomínio + quantidade de unidades.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="section" id="contato">
+    <div class="container">
+      <h2>Solicite uma proposta</h2>
+      <p class="lead">Preencha e enviaremos uma proposta objetiva pelo WhatsApp.</p>
+
+      <div class="contact">
+        <div class="card">
+          <h3 style="margin-top:0">Contato rápido</h3>
+          <p class="muted">WhatsApp direto e e-mail.</p>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" id="btnWhats" href="#" target="_blank" rel="noopener">💬 Chamar no WhatsApp</a>
+            <a class="btn" id="btnEmail" href="#">✉️ Enviar e-mail</a>
+          </div>
+
+          <div class="divider"></div>
+          <p class="muted" style="margin:0">
+            Cidades: <b style="color:var(--text)">Anápolis • Pirenópolis • Goiânia</b><br/>
+            WhatsApp: <b style="color:var(--text)" id="whatsNumber2"></b><br/>
+            E-mail: <b style="color:var(--text)" id="emailText"></b>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0">Formulário</h3>
+
+          <form id="leadForm">
+            <label for="nome">Seu nome</label>
+            <input id="nome" name="nome" placeholder="Ex.: Carlos Silva" required />
+
+            <label for="condominio">Condomínio</label>
+            <input id="condominio" name="condominio" placeholder="Ex.: Residencial Serra Azul" />
+
+            <label for="unidades">Qtd. de unidades</label>
+            <input id="unidades" name="unidades" type="number" min="0" placeholder="Ex.: 120" />
+
+            <label for="cidade">Cidade</label>
+            <input id="cidade" name="cidade" placeholder="Ex.: Anápolis" />
+
+            <label for="mensagem">O que você precisa?</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Ex.: Portaria 24h, Portaria Remota, limpeza e zeladoria..." required></textarea>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px">
+              <button class="btn primary" type="submit">Enviar no WhatsApp</button>
+              <button class="btn" type="button" id="btnCopy">Copiar mensagem</button>
+            </div>
+
+            <p class="muted" style="margin:12px 0 0; font-size:12px">
+              Ao enviar, você será direcionado ao WhatsApp com a mensagem pronta.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+      <div>© <span id="year"></span> <b>CA Soluções</b> • Portaria e Limpeza</div>
+      <div class="muted">Anápolis • Pirenópolis • Goiânia • <span id="emailText2"></span></div>
+    </div>
+  </footer>
+
+  <a class="float-whats" id="floatWhats" href="#" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp">
+    <i>🟢</i> <span>Chamar no WhatsApp</span>
+  </a>
+
+  <script>
+    // ====== DADOS DA CA SOLUÇÕES ======
+    const WHATSAPP_NUMBER = "5562982401283";
+    const DISPLAY_NUMBER  = "(62) 98240-1283";
+    const EMAIL           = "calucoes25@gmail.com";
+    const BUSINESS_NAME   = "CA Soluções";
+    const CITIES          = "Anápolis / Pirenópolis / Goiânia";
+    // =================================
+
+    // Menu mobile
+    const btnMenu = document.getElementById("btnMenu");
+    const menu = document.getElementById("menu");
+    btnMenu?.addEventListener("click", () => menu.classList.toggle("open"));
+    menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => menu.classList.remove("open")));
+
+    // Ano
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Números e e-mail na tela
+    document.getElementById("whatsNumber").textContent = DISPLAY_NUMBER;
+    document.getElementById("whatsNumber2").textContent = DISPLAY_NUMBER;
+    document.getElementById("emailText").textContent = EMAIL;
+    document.getElementById("emailText2").textContent = EMAIL;
+    document.getElementById("btnEmail").href = `mailto:${EMAIL}`;
+
+    function buildWhatsLink(text){
+      const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+      const msg = encodeURIComponent(text);
+      return `${base}?text=${msg}`;
+    }
+
+    const defaultMsg =
+`Olá! Vim pelo site da ${BUSINESS_NAME} e gostaria de uma proposta.
+
+Tenho interesse em:
+- Portaria 24h (física) a partir de R$ 27.500 (inclui zeladoria + limpeza)
+- Portaria remota a partir de R$ 15.000
+
+Atendimento: ${CITIES}`;
+
+    const whatsHero = document.getElementById("btnWhatsHero");
+    const btnWhats  = document.getElementById("btnWhats");
+    const floatWhats = document.getElementById("floatWhats");
+    [whatsHero, btnWhats, floatWhats].forEach(el => {
+      if(!el) return;
+      el.href = buildWhatsLink(defaultMsg);
+    });
+
+    // Formulário -> Whats
+    const form = document.getElementById("leadForm");
+    const btnCopy = document.getElementById("btnCopy");
+
+    function buildLeadMessage(){
+      const nome = document.getElementById("nome").value.trim();
+      const condominio = document.getElementById("condominio").value.trim();
+      const unidades = document.getElementById("unidades").value.trim();
+      const cidade = document.getElementById("cidade").value.trim();
+      const mensagem = document.getElementById("mensagem").value.trim();
+
+      return [
+        `Olá! Vim pelo site da ${BUSINESS_NAME} e quero uma proposta.`,
+        ``,
+        `Nome: ${nome || "-"}`,
+        `Condomínio: ${condominio || "-"}`,
+        `Unidades: ${unidades || "-"}`,
+        `Cidade: ${cidade || "-"}`,
+        ``,
+        `Interesse:`,
+        `- Portaria 24h (física) a partir de R$ 27.500 (inclui zeladoria + limpeza)`,
+        `- Portaria remota a partir de R$ 15.000`,
+        ``,
+        `Detalhes: ${mensagem || "-"}`,
+        ``,
+        `Atendimento: ${CITIES}`,
+        `WhatsApp: ${DISPLAY_NUMBER}`,
+        `E-mail: ${EMAIL}`
+      ].join("\n");
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = buildLeadMessage();
+      window.open(buildWhatsLink(text), "_blank");
+    });
+
+    btnCopy.addEventListener("click", async () => {
+      try{
+        const text = buildLeadMessage();
+        await navigator.clipboard.writeText(text);
+        btnCopy.textContent = "Copiado ✅";
+        setTimeout(()=> btnCopy.textContent = "Copiar mensagem", 1400);
+      }catch(err){
+        alert("Não foi possível copiar automaticamente. Use 'Enviar no WhatsApp'.");
+      }
+    });
+  </script>
+</body>
+</html>
